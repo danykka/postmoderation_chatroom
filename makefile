@@ -18,18 +18,16 @@ move:
 	cp chatclient ./client1
 	cp chatclient ./client2
 
-chatclient.o: ./src/chatclient.c structures
+chatclient.o: chatclient.c structures.h
 	$(CC) $(CFLAGS) chatclient.c
-	mv chatclient.o ./obj
 
-chatserver.o: ./src/chatserver.c ./lib/structures.h
-	$(CC) $(CFLAGS) ./src/chatserver.c
-	mv chatserver.o ./obj
+chatserver.o: chatserver.c structures.h
+	$(CC) $(CFLAGS) chatserver.c
 
-structures.o: ./lib/structures.h ./src/structures.c
-	$(CC) $(CFLAGS) ./src/structures.c
-	mv structures.o ./obj
+structures.o: structures.h structures.c
+	$(CC) $(CFLAGS) structures.c
 
 clean:
 	rm -rf *.o *~ chatclient chatserver
 	rm -rf client1 client2
+
